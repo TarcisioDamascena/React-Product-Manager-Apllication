@@ -1,9 +1,9 @@
-import { Header } from './components/header'
+import { Home } from './Pages/Home'
 
 function App() {
   return (
     <div>
-      <Header />
+      <Home />
     </div>
   )
 }

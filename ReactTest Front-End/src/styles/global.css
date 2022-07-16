@@ -4,9 +4,9 @@
 
 @layer components{
     .li-primary {
-        @apply m-4 py-2 px-4 bg-gray-400 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+        @apply flex flex-row m-4 py-2 px-4 bg-cyan-300 text-black font-semibold rounded-sm hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
     }
     .li-secondary {
-        @apply  text-white border border-white w-40 mx-2 my-4 flex items-center justify-center ;
+        @apply  text-white border border-white min-w-[140px] w-[210px] mx-2 my-4 flex items-center justify-center rounded-sm shadow-md ;
     }
 }
