@@ -1,0 +1,30 @@
+{
+  "name": "desafio-react-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TarcisioDamascena/React-Apllication-Test/tree/main/ReactTest%20Back-End"
+  },
+  "author": "TarcisioDamascena",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TarcisioDamascena/React-Apllication-Test/issues"
+  },
+  "homepage": "https://github.com/TarcisioDamascena/React-Apllication-Test/tree/main/ReactTest%20Back-End#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.20.0",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^6.4.4",
+    "socket.io": "^4.4.1"
+  }
+}
