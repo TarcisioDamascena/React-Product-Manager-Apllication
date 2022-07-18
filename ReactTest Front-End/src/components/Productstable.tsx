@@ -1,4 +1,6 @@
+import { format } from "date-fns";
 import { Trash } from "phosphor-react";
+import { useEffect, useState } from "react";
 
 
 interface propProductTable {
@@ -13,6 +15,16 @@ interface propProductTable {
 }
 
 export function ProductsTable(props: propProductTable) {
+
+    const [formatedDate, setFormatedDate] = useState('');
+
+    
+    useEffect(() => {
+
+        let _date = new Date(props.data.data_cadastro)
+        setFormatedDate(format(_date, "d'/'MM'/'yyyy"))
+
+    }, [props])
 
     return (
         <div className="flex justify-around items-center h-full max-h-28 bg-blue-primary rounded-xl mb-8 drop-shadow-md shadow-gray-900">
@@ -31,7 +43,7 @@ export function ProductsTable(props: propProductTable) {
                 </div>
                 <div className="product-info">
                     <p>Data de Cadastro:</p>
-                    <span className="text-white">{props.data?.data_cadastro}</span>
+                    <span className="text-white">{formatedDate}</span>
                 </div>
             </div>
 

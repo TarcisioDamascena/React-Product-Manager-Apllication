@@ -136,7 +136,8 @@ export function Modal(props: modalProps) {
                                             className="modal-input"
                                             value={date}
                                             placeholder="00/00/0000:"
-                                            onChange={event => setDate(event.target.value)}
+                                            //onChange={event => setDate(event.target.value)}
+                                            onChange={event => console.log(new Date(event.target.value))}
                                         />
                                     </form>
                                 </div>
