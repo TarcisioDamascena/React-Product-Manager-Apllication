@@ -3,10 +3,21 @@
 @tailwind utilities;
 
 @layer components{
-    .li-primary {
-        @apply flex flex-row m-4 py-2 px-4 bg-cyan-300 text-black font-semibold rounded-sm hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    .span-sidebar {
+        @apply text-gray-primary;
     }
-    .li-secondary {
-        @apply  text-white border border-white min-w-[140px] w-[210px] mx-2 my-4 flex items-center justify-center rounded-sm shadow-md ;
+    .sidebar-ancor {
+        @apply text-gray-primary text-lg flex flex-row w-36 justify-start items-center mx-4 mt-4 hover:text-cyan-500;
     }
+
+    .button-generic {
+        @apply w-28 h-10 mt-2 border border-gray-400 text-gray-400 rounded-3xl hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:border-cyan-500 hover:text-white transition-colors duration-300;
+    }
+    .product-info {
+        @apply min-w-[180px] h-fit min-h-[30px] text-gray-secondary my-4 mx-2 justify-center items-start;
+    }
+    .modal-input{
+        @apply appearance-none bg-blue-secondary text-gray-primary w-full max-w-[600px] border-b border-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none mb-4;
+    }
+    
 }

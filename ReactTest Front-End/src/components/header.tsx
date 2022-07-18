@@ -1,28 +1,61 @@
-import { SignOut } from "phosphor-react";
+import { useState } from "react"
+import { api } from "../Libs/api"
+import { Modal } from "./Modal"
 
 export function Header() {
+
+    const [code, setCode] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState('')
+    const [date, setDate] = useState('')
+
+    const [openModal, setOpenModal] = useState(false);
+
+    const submit = async (submitData) => {
+
+        api.post("/", {
+            codigo: submitData.codigo,
+            descricao: submitData.descricao,
+            preco: submitData.preco,
+            data_cadastro: submitData.data_cadastro,
+
+        }).then((data) => {
+            setOpenModal(false)
+            console.log(data.status, data.data);
+            
+        }).catch((e) => alert(e))
+    }
+
     return (
-        <div className="w-full h-fit bg-gray-800 flex flex-row">
-            <div className="flex flex-1 max-w-[1100px] mx-2 my-4 items-center justify-start">
-                <h1 className="text-xl text-white font-semibold shadow-md">
-                    Gerenciador de produtos
-                </h1>
-            </div>
-            <div className="flex max-w-[300px] items-center justify-center">
-                <img
-                    className="w-[36px] h-[36px] rounded-full mx-2 my-2"
-                    src="https://github.com/TarcisioDamascena.png"
-                    alt="User avatar"
+        <div className="w-full h-fit min-h-[30px] bg-blue-primary flex flex-row items-center justify-between ">
+            <div className="flex flex-1 max-w-[1100px] mx-2 my-4 items-center justify-start ">
+                <input
+                    type="text"
+                    placeholder="Buscar"
+                    className="appearance-none bg-transparent text-gray-primary w-full max-w-[500px] border-b border-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none "
                 />
-                <p className="text-sm text-white font-semibold mx-2 my-4 items-center">
-                    Tarcisio Damascena
-                </p>
-                <button
-                    className="flex text-xs w-14 h-6 text-white mx-2 my-4 px-2 items-center justify-between shadow-md rounded-2xl border border-slate-500 hover:border-cyan-400 bg-slate-500 hover:bg-slate-900 ">
-                    Sair
-                    <SignOut size={16} />
-                </button>
             </div>
+
+            <div className="flex max-w-[300px] mx-2 items-center justify-center">
+                <>
+                    <button
+                        className="button-generic"
+                        type="button"
+                        onClick={() => setOpenModal(true)}
+                    >
+                        Adicionar
+                    </button>
+
+                    <Modal
+                        open={openModal}
+                        onCancel={() => setOpenModal(false)}
+                        onSubmit={(data) => { setOpenModal(false); submit(data) }}
+                    />
+
+                </>
+
+            </div>
+
         </div>
     )
 }

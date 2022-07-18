@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/react-input-mask": "^3.0.1",
+    "axios": "^0.27.2",
+    "mask-input-dynamic": "^1.1.2",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
