@@ -2,7 +2,11 @@ import { useState } from "react"
 import { api } from "../Libs/api"
 import { Modal } from "./Modal"
 
-export function Header() {
+interface propsHeader {
+    onClick: Function
+}
+
+export function Header(props: propsHeader) {
 
     const [code, setCode] = useState('')
     const [description, setDescription] = useState('')
@@ -41,7 +45,7 @@ export function Header() {
                     <button
                         className="button-generic"
                         type="button"
-                        onClick={() => setOpenModal(true)}
+                        onClick={() => props.onClick()}
                     >
                         Adicionar
                     </button>

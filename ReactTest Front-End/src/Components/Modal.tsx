@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import InputMask from "react-input-mask";
 
 interface modalProps {
     open: boolean,
     onSubmit: Function,
     onCancel: Function,
+    editingMode: boolean
     data?: {
         codigo?: number,
         descricao?: string,
@@ -18,11 +20,12 @@ export function Modal(props: modalProps) {
     const [description, setDescription] = useState(props.data?.descricao)
     const [price, setPrice] = useState(props.data?.preco)
     const [date, setDate] = useState(props.data?.data_cadastro)
-
+    
+    const [enableSubmitButtom, setEnableSubmitButtom] = useState(false)
     const [submitData, setSubmitData] = useState({})
 
     useEffect(() => {
-        if(props.data != undefined){
+        if (props.data != undefined) {
 
             setCode(props.data?.codigo)
             setDescription(props.data?.descricao)
@@ -40,8 +43,29 @@ export function Modal(props: modalProps) {
         }
         setSubmitData(_submitData)
 
+        const filterByData = (obj) => {
+            if (obj != undefined) {
+                return true
+            }
+            return false;
+        }
+
+        let reducedState = [code, description, price, date].filter(filterByData);
+        if(reducedState.length == 4){
+            setEnableSubmitButtom(true)
+        }
+        else{
+            setEnableSubmitButtom(false)
+        }
+
     }, [code, description, price, date,])
 
+    const ClearState = () => {
+        setCode(undefined)
+        setDescription(undefined)
+        setPrice(undefined)
+        setDate(undefined)
+    }
 
     return (
 
@@ -66,12 +90,12 @@ export function Modal(props: modalProps) {
                                         >
                                             Código do produto
                                         </label>
-                                        <input
+                                        <InputMask
                                             type="tel"
-                                            inputMode="numeric"
+                                            placeholder="########"
+                                            maskChar=''
                                             className="modal-input"
-                                            placeholder="####-####-####-####"
-                                            value={code}
+                                            mask={'99999999'}
                                             onChange={event => setCode(parseInt(event.target.value))}
                                         />
                                         <label
@@ -83,6 +107,7 @@ export function Modal(props: modalProps) {
                                         <input
                                             type="text"
                                             className="modal-input"
+                                            maxLength={22}
                                             value={description}
                                             placeholder="Caixa de leite:"
                                             onChange={event => setDescription(event.target.value)}
@@ -94,10 +119,10 @@ export function Modal(props: modalProps) {
                                             Preço do produto:
                                         </label>
                                         <input
-                                            type="tel"
+                                            type="number"
                                             className="modal-input"
                                             value={price}
-                                            placeholder="99,99 R$:"
+                                            placeholder="R$99.90"
                                             onChange={event => setPrice(parseFloat(event.target.value))}
                                         />
                                         <label
@@ -119,14 +144,16 @@ export function Modal(props: modalProps) {
                                     <button
                                         className=" text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
-                                        onClick={() => props.onCancel()}
+                                        onClick={() => { props.onCancel(), ClearState() }}
                                     >
                                         Fechar
                                     </button>
+
                                     <button
-                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-10"
                                         type="button"
-                                        onClick={() => props.onSubmit(submitData)}
+                                        disabled={!enableSubmitButtom}
+                                        onClick={() => { props.onSubmit(submitData); ClearState() }}
                                     >
                                         Adicionar
                                     </button>

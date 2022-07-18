@@ -1,7 +1,8 @@
 import { Trash } from "phosphor-react";
 
 interface propProductTable {
-    onEdit: Function
+    onEdit: Function,
+    onDelete: Function
     data?: {
         codigo?: number,
         descricao?: string,
@@ -40,8 +41,12 @@ export function ProductsTable(props: propProductTable) {
                 >
                     Editar
                 </button>
-                <a href="#">
-                    <Trash size={24} color={'#A3ABC3'} />
+                <a
+                    href="#"
+                    onClick={() => props.onDelete()}
+                    className="text-gray-primary hover:text-gray-500 transition-all"
+                >
+                    <Trash size={24} />
                 </a>
 
             </div>
